@@ -1,3 +1,5 @@
+import $ from 'jquery';
+
 function handleTitleClicked() {
   $('li').click(function() {
     if ($(this).find('.hidden').hasClass('expanded')) {
