@@ -1,19 +1,13 @@
 import $ from 'jquery';
+import 'normalize.css';
+import './main.css';
+import bookmark from './bookmark';
+import api from './api';
+import store from './store';
 
-function handleTitleClicked() {
-  $('li').click(function() {
-    if ($(this).find('.hidden').hasClass('expanded')) {
-      $(this).find('.hidden').removeClass('expanded');
-    } else {
-      $(this).find('.hidden').addClass('expanded');
-    }
-  });
+function main() {
+  bookmark.bindEventListeners();
+  bookmark.render();
 }
 
-
-
-
-function doIt() {
-  handleTitleClicked();
-}
-$(doIt);
+$(main);
