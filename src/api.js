@@ -2,7 +2,6 @@
 const BASE_URL = 'https://thinkful-list-api.herokuapp.com/balayb';
 
 function createBookmark(formElement) {
-    console.log(formElement);
   return fetch(`${BASE_URL}/bookmarks`, {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
