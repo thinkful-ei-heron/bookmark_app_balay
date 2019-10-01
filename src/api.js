@@ -1,17 +1,12 @@
 /* eslint-disable no-console */
 const BASE_URL = 'https://thinkful-list-api.herokuapp.com/balayb';
 
-function createBookmark(url, title, description, rating) {
-  const data = {
-    title: title,
-    url: url,
-    desc: description,
-    rating: rating
-  };
+function createBookmark(formElement) {
+    console.log(formElement);
   return fetch(`${BASE_URL}/bookmarks`, {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify(data)
+    body: formElement
   });
 }
 
@@ -19,9 +14,15 @@ function getItems() {
   return fetch(`${BASE_URL}/bookmarks`);
 }
 
+function deleteItem(id) {
+  return fetch(`${BASE_URL}/bookmarks/${id}`, {
+    method: 'DELETE'
+  });
+}
+
 
 export default {
   createBookmark,
-  getItems
-
+  getItems,
+  deleteItem
 };

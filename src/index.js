@@ -4,6 +4,8 @@ import './main.css';
 import bookmark from './bookmark';
 import api from './api';
 import store from './store';
+window.store = store;
+window.bookmark = bookmark;
 
 function main() {
   api.getItems()

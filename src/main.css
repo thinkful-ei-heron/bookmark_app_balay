@@ -38,7 +38,36 @@ button:hover {
 
 .filter-button {
     margin-left: 5px;
+    font-size: 20px;
+    color: black;
+    border: 2px solid gray;
+    background-color: white;
+    border-radius: 3px;
+    width: 50%;
+    text-align: center;
 }
+
+select {
+    border: none;
+    appearance: none;
+    -webkit-appearance: none; 
+    -moz-appearance: none;
+    outline: none;
+    display: inline-block;
+    width: 50px;
+    cursor: pointer;
+
+}
+.select {position: relative;}
+.select:after {
+    content: "\f0d7";
+    font-size: 20px;
+    font-family: "FontAwesome";
+    color: #e26560;
+    position: absolute;
+    pointer-events: none;
+}
+
 
 .new-and-filter {
     display: flex;
@@ -121,6 +150,10 @@ ul i {
     flex-direction: row;
 }
 
+.form-label {
+    font-size: 18px;
+}
+
 input {
     margin-bottom: 10px;
     font-size: 15px;
@@ -160,8 +193,8 @@ textarea {
     border-radius: 7px;
 }
 
-div.stars {
-      width: 290px;
+section.stars {
+      width: 270px;
       display: inline-block;
       text-align: center;
       margin: 0 auto;
@@ -201,6 +234,23 @@ div.stars {
         border: 3px solid gray;
     }
 
+    .filter-button {
+        font-size: 25px;
+        border: 3px solid gray;
+    }
+
+    .form-label {
+        font-size: 23px;
+    }
+
+    select {
+        width: 65px;
+    }
+
+    .select:after {
+        font-size: 25px;
+    }
+
     li {
         font-size: 22px;
         border: 3px solid gray;
@@ -227,7 +277,7 @@ div.stars {
         font-size: 55px;
     }
 
-    div.stars {
+    section.stars {
         width: 390px;
     }
 
@@ -244,7 +294,7 @@ div.stars {
         font-size: 25px;
         height: 50px;
     }
-
+    
     p {
         margin-right: 44px;
         margin-left: 44px;
@@ -262,6 +312,10 @@ div.stars {
         width: 700px;
     }
 
+    .form-label {
+        font-size: 33px;
+    }
+
     header img {
        display: block; 
        margin-left: auto;
@@ -272,6 +326,19 @@ div.stars {
     button {
         font-size: 33px;
         border: 4px solid gray;
+    }
+
+    .filter-button {
+        font-size: 33px;
+        border: 4px solid gray;
+    }
+
+    select {
+        width: 80px;
+    }
+
+    .select:after {
+        font-size: 33px;
     }
 
     li {
@@ -288,7 +355,7 @@ div.stars {
         font-size: 80px;
     }
 
-    div.stars {
+    section.stars {
         width: 500px;
     }
 
