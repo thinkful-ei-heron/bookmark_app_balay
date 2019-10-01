@@ -1,11 +1,21 @@
 const bookmarks = [];
-let ratingFilter = 0;
+const adding = false;
+const error = null;
+const filter = 0;
 
+
+function addItem(item) {
+  this.bookmarks.push(item);
+}
 
 
 
 
 export default {
   bookmarks,
-  ratingFilter,
+  adding,
+  error,
+  filter,
+  addItem
 };
+
