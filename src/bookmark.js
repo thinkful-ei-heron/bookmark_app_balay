@@ -3,12 +3,14 @@ import $ from 'jquery';
 import api from './api';
 import store from './store';
 
+
+
 function generateBookmarks(item) {
   let expanded = '';
   let hiddenClass = '';
   if (item.expanded) {
-    expanded = `<span class="expanded">
-      <button  class="visit-site" onclick="window.open('${item.url}', '_blank')">Visit Site</button>
+    expanded = `<span class="expanded" role="bookmark-info">
+      <button type="button" class="visit-site" onclick="window.open('${item.url}', '_blank')">Visit Site</button>
       <button type="button" class="delete-bookmark"><i class="fa fa-trash"></i> Delete</button>
       <span class="break"></span>
       <p>${item.desc}</p>
@@ -20,35 +22,45 @@ function generateBookmarks(item) {
   }
 
   return `
-    <li id="${item.id}" ${hiddenClass}>
-    <span class="title-rating">${item.title} </span>
-    <span class="rating">${item.rating} <i class="fa fa-star"></i></span>
+    <li id="${item.id}" ${hiddenClass} tabindex="0" role="button" name="bookmark" aria-expanded="false">
+    <span class="title-rating" name="bookmark-title">${item.title} </span>
+    <span class="rating" name="bookmark-rating">${item.rating} <i class="fa fa-star"></i></span>
     <span class="break"></span>
     ${expanded}
     </li>`;
 }
 
 function generateForm() {
-  return `<form id="add-bookmark" action="#">
+  return `<form id="add-bookmark" role="add-bookmark" action="#">
       <label for="url" class="form-label">URL</label>
-      <input type="url" class="bookmark-url" name="url" placeholder="(required)" required>
-      <label for="title" class="form-label">Title</label>
+      <input type="url" class="bookmark-url"  id="url" name="url" placeholder="(required)" required>
+      <label for="title" id="title" class="form-label">Title</label>
       <input type="text" class="bookmark-title" name="title" placeholder="(required)" required>
-      <label for="rating" class="form-label">Rate your bookmark</label>
-      <section class="stars" name="rating">
-           <input class="star star-5" id="star-5" type="radio" name="rating" value="5"/>
-           <label class="star star-5" for="star-5"></label>
-           <input class="star star-4" id="star-4" type="radio" name="rating" value="4"/>
-           <label class="star star-4" for="star-4"></label>
-           <input class="star star-3" id="star-3" type="radio" name="rating" value="3"/>
-           <label class="star star-3" for="star-3"></label>
-           <input class="star star-2" id="star-2" type="radio" name="rating" value="2"/>
-           <label class="star star-2" for="star-2"></label>
+      <label for="bookmark-rating" class="form-label">Rate your bookmark</label>
+      <fieldset class="stars" id="bookmark-rating">
+          <div>
            <input class="star star-1" id="star-1" type="radio" name="rating" value="1" checked/>
-           <label class="star star-1" for="star-1"></label>
-       </section>
-       <label for="desc" class="form-label">Add description</label>
-      <textarea name="desc" form="add-bookmark" class="description" placeholder="(optional)"></textarea>
+           <label class="star star-1" for="star-1"><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></label>
+           </div>
+           <div>
+           <input class="star star-2" id="star-2" type="radio" name="rating" value="2"/>
+           <label class="star star-2" for="star-2"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></label>
+           </div>
+           <div>
+           <input class="star star-3" id="star-3" type="radio" name="rating" value="3"/>
+           <label class="star star-3" for="star-3"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></label>
+           </div>
+           <div>
+           <input class="star star-4" id="star-4" type="radio" name="rating" value="4"/>
+           <label class="star star-4" for="star-4"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i></label>
+           </div>
+           <div>
+           <input class="star star-5" id="star-5" type="radio" name="rating" value="5"/>
+           <label class="star star-5" for="star-5"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></label> 
+           </div>
+       </fieldset>
+       <label for="bookmark-description" class="form-label">Add description</label>
+      <textarea name="desc" form="add-bookmark" id="bookmark-description" class="description" placeholder="(optional)"></textarea>
       <div class="submit-and-cancel">
           <button type="submit" name="submit-bookmark" class="submit-bookmark">Create</button>
           <button type="button" name="cancel-bookmark" class="cancel-bookmark">Cancel</button>
@@ -58,18 +70,37 @@ function generateForm() {
 
 function generateNewAndFilter() {
   return `<button type="button" name="new-button" class="new-button" value="New"><i class="fa fa-plus"></i> New</button>
-    <span class="filter-button">
-    <label class="select">
-    <select>
-      <option selected disabled hidden>Filter</option>
-      <option value="5">5</option>
-      <option value="4">4</option>
-      <option value="3">3</option>
-      <option value="2">2</option>
-      <option value="1">1</option>
-    </select>
-    </label>
-    </span> `;
+    <select role="filter-bookmarks" class="filter">
+      <option id="text" selected disabled hidden>Filter by</option>
+      <option value="5">5 stars</option>
+      <option value="4">4 stars & up</option>
+      <option value="3">3 stars & up</option>
+      <option value="2">2 stars & up</option>
+      <option value="1">1 star & up</option>
+    </select>`;
+}
+
+function generateError(message) {
+  return `<section class="error-content" role="alert">
+  <p>${message}</p>
+  <button type="button" role="close-error" id="cancel-error"><i class="fa fa-times"></i></button>
+</section>`;
+}
+
+function renderError() {
+  if (store.error) {
+    const el = generateError(store.error);
+    $('.error-container').html(el);
+  } else {
+    $('.error-container').empty();
+  }
+}
+
+function handleCloseError() {
+  $('.error-container').on('click', '#cancel-error', () => {
+    store.setError(null);
+    renderError();
+  });
 }
 
 
@@ -80,6 +111,7 @@ function generateBookmarksString(array) {
 
 
 function render() {
+  renderError();
   let bookmarks = [...store.bookmarks];
   const bookmarkList = generateBookmarksString(bookmarks);
   $('.bookmark-form').html(generateForm());
@@ -112,20 +144,29 @@ function serializeJson(form) {
   return JSON.stringify(o);
 }
 
+function handleCancel() {
+  $('.flex-container').on('click', '.cancel-bookmark', event => {
+    $('.bookmark-url, .bookmark-title, .stars, .description').val('');
+    store.toggleAdding();
+    render();
+  });
+}
+
 
 function handleBookmarkAdd() {
   $('.flex-container').on('submit', '#add-bookmark', event => {
     event.preventDefault();
     let formElement = $('#add-bookmark')[0];
     api.createBookmark(serializeJson(formElement))
-      .then(res => res.json())
       .then(item => {
         store.addItem(item);
         store.toggleAdding();
         render();
       })
-      .catch(err => console.log(err.message));
-    
+      .catch((err) => {
+        store.setError(err.message);
+        renderError();
+      });
   });
 }
 
@@ -145,6 +186,17 @@ function handleFilter() {
 }
 
 function handleTitleClicked() {
+  $('.flex-container').on('keypress', 'li', function(event) {
+    if (event.target.matches('button')) {
+      return;
+    }
+    if (event.keyCode !== 13 && event.keyCode !== 32) {
+      return;
+    }
+    const id = $(this).attr('id');
+    store.toggleExpanded(id);
+    render();
+  });
   $('.flex-container').on('click', 'li', function() {
     const id = $(this).attr('id');
     store.toggleExpanded(id);
@@ -160,7 +212,10 @@ function handleDelete() {
         store.deleteBookmark(id);
         render();
       })
-      .catch(err => console.log(err.message));
+      .catch((err) => {
+        store.setError(err.message);
+        renderError();
+      });
   });
 }
 
@@ -168,10 +223,12 @@ function handleDelete() {
 function bindEventListeners() {
   generateForm();
   handleNewButton();
+  handleCancel();
   handleBookmarkAdd();
   handleFilter();
   handleTitleClicked();
   handleDelete();
+  handleCloseError();
 }
 
 export default {

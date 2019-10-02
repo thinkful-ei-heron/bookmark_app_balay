@@ -19,6 +19,29 @@ header img {
     padding: 20px;
 }
 
+.fa-times {
+    color: grey;
+}
+
+#cancel-error {
+    width: 40px;
+    display: inline-block;
+    margin: 0 auto;
+}
+
+.error-container {
+    margin-bottom: 10px;
+    background-color: #FFBABA;
+    color: #D8000C;
+    border-radius: 3px;
+}
+
+.error-content {
+    display: flex;
+    flex-direction: column;
+    padding: 2px;
+}
+
 button {
     font-size: 20px;
     color: black;
@@ -26,48 +49,37 @@ button {
     background-color: white;
     border-radius: 3px;
     width: 50%;
+    cursor: pointer;
 }
 
 button:hover {
     box-shadow: 5px 5px 8px #888888;
 }
 
+.filter:hover {
+    box-shadow: 5px 5px 8px #888888;
+}
+
+li:hover {
+    cursor: pointer;
+}
+
 .new-button {
     margin-right: 5px;
 }
 
-.filter-button {
-    margin-left: 5px;
+li:hover {
+    box-shadow: 4px 4px 8px #888888;
+}
+
+.filter {
     font-size: 20px;
-    color: black;
     border: 2px solid gray;
     background-color: white;
-    border-radius: 3px;
     width: 50%;
-    text-align: center;
-}
-
-select {
-    border: none;
-    appearance: none;
-    -webkit-appearance: none; 
-    -moz-appearance: none;
-    outline: none;
-    display: inline-block;
-    width: 50px;
+    -webkit-appearance: menulist;
     cursor: pointer;
-
 }
-.select {position: relative;}
-.select:after {
-    content: "\f0d7";
-    font-size: 20px;
-    font-family: "FontAwesome";
-    color: #e26560;
-    position: absolute;
-    pointer-events: none;
-}
-
 
 .new-and-filter {
     display: flex;
@@ -162,10 +174,6 @@ input {
     padding: 4px;
 }
 
-input:focus, textarea:focus {
-    outline: none;
-}
-
 textarea {
     margin-bottom: 10px;
     margin-top: 10px;
@@ -193,41 +201,40 @@ textarea {
     border-radius: 7px;
 }
 
-section.stars {
-      width: 270px;
-      display: inline-block;
-      text-align: center;
-      margin: 0 auto;
-    }
-    input.star { display: none; }
-    label.star {
-      float: right;
-      padding: 10px;
-      font-size: 36px;
-      color: goldenrod;
-      transition: all .2s;
-    }
-   
-    input.star:checked ~ label.star:before {
-      content: '\f005';
-      color: goldenrod;
-      transition: all .25s;
-    }
-   
-    input.star-5:checked ~ label.star:before {
-      color: goldenrod;
-    }
-   
-    input.star-1:checked ~ label.star:before { color: goldenrod; }
-    
-    label.star:before {
-      content: '\f006';
-      font-family: FontAwesome;
-    }
+.stars {
+    border: 2px solid gray;
+    border-radius: 3px;
+    padding: 10px;
+    margin: 5px 0 5px 0;
+}
 
+label.star {
+    display: inline-block;
+    width: 120px;
+    text-align: right;
+    font-size: 22px;
+}
 
+fieldset i {
+    color: goldenrod;
+}
+
+input[type='radio']:hover {
+    cursor: pointer;
+ }
+input[type='radio'] { transform: scale(1); }
 
 @media only screen and (min-width: 768px) {
+    
+    label.star {
+        font-size: 30px;
+        width: 200px;
+    }
+
+    input[type='radio'] { 
+        transform: scale(1.5);
+        margin-left: 10px;
+    }
 
     button {
         font-size: 25px;
@@ -245,10 +252,6 @@ section.stars {
 
     select {
         width: 65px;
-    }
-
-    .select:after {
-        font-size: 25px;
     }
 
     li {
@@ -271,14 +274,6 @@ section.stars {
     #add-bookmark {
         margin: 0 auto;
         width: 450px;
-    }
-
-    label.star {
-        font-size: 55px;
-    }
-
-    section.stars {
-        width: 390px;
     }
 
     input {
@@ -304,13 +299,28 @@ section.stars {
     .visit-site, .delete-bookmark {
         font-size: 20px;
     }
+
+    .filter {
+        font-size: 25px;
+    }
 }
 
 @media only screen and (min-width: 1024px) {
+
+    .filter {
+        font-size: 33px;
+    }
+
     .flex-container {
         margin: 0 auto;
         width: 700px;
     }
+
+    input[type='radio'] { 
+        transform: scale(1.5); 
+        margin-left: 10px;
+    }
+
 
     .form-label {
         font-size: 33px;
@@ -351,14 +361,6 @@ section.stars {
         width: 650px;
     }
 
-    label.star {
-        font-size: 80px;
-    }
-
-    section.stars {
-        width: 500px;
-    }
-
     input {
         font-size: 35px;
         margin-bottom: 15px;
@@ -391,6 +393,11 @@ section.stars {
 
     .hidden {
         margin-top: 10px;
+    }
+
+    label.star {
+        font-size: 45px;
+        width: 300px;
     }
     
 }

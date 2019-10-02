@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
 const bookmarks = [];
-const adding = false;
-const error = null;
-const filter = 0;
+let adding = false;
+let error = null;
+let filter = 0;
 
 
 function findById(id) {
@@ -31,6 +31,9 @@ function filterBookmarks(num) {
   this.filter = num;
 }
 
+function setError(error) {
+  this.error = error;
+}
 
 
 export default {
@@ -43,6 +46,7 @@ export default {
   toggleAdding,
   toggleExpanded,
   deleteBookmark,
-  filterBookmarks
+  filterBookmarks,
+  setError
 };
 
